@@ -45,8 +45,12 @@ public class LoginJframe extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gutenberg Gui");
+        setMaximumSize(new java.awt.Dimension(750, 460));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(750, 460));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         emailJlabel.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
@@ -96,7 +100,9 @@ public class LoginJframe extends javax.swing.JFrame {
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                MainFrame mainFrame = new MainFrame(new User(this.emailJTextField.getText()), dbHelper);
+                User user = new User(this.emailJTextField.getText(), dbHelper);
+                user.setId(resultSet.getInt("id"));
+                MainFrame mainFrame = new MainFrame(user, dbHelper);
                 mainFrame.setLocationRelativeTo(null);
                 mainFrame.setVisible(true);
                 this.setVisible(false);

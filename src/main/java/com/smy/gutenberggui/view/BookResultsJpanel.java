@@ -153,6 +153,7 @@ public class BookResultsJpanel extends javax.swing.JPanel {
 
         try {
             temp = new BookViewJframe(etext_no, this.mainFrame);
+            temp.setLocationRelativeTo(null);
             temp.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(BookResultsJpanel.class.getName()).log(Level.SEVERE, null, ex);

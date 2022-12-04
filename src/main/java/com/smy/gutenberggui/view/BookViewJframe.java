@@ -21,12 +21,10 @@ public class BookViewJframe extends javax.swing.JFrame {
         initComponents();
         this.mainFrame = mainFrame;
         this.etext_no = etext_no;
-        
-
         final TextPage page;
         page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/cache/epub/" + etext_no + "/pg" + etext_no + ".txt");
         this.bookTextArea.append(page.getContent());
-        System.out.println(bookTextArea.getText());
+        this.jScrollPane2.getVerticalScrollBar().getModel().setValue(0);
 
     }
 
@@ -66,7 +64,7 @@ public class BookViewJframe extends javax.swing.JFrame {
         mainJPanel.add(geriButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 580, 128, -1));
 
         bookTextArea.setEditable(false);
-        bookTextArea.setBackground(new java.awt.Color(255, 255, 255));
+        bookTextArea.setBackground(new java.awt.Color(187, 187, 187));
         bookTextArea.setColumns(20);
         bookTextArea.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         bookTextArea.setForeground(new java.awt.Color(0, 0, 0));
@@ -98,7 +96,11 @@ public class BookViewJframe extends javax.swing.JFrame {
     private void kitaplarimaEkleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kitaplarimaEkleButtonActionPerformed
         this.mainFrame.getUser().addBook(this.etext_no, this.jScrollPane2.getVerticalScrollBar().getModel().getValue());
         // get scrollbar's current position -> this.jScrollPane2.getVerticalScrollBar().getModel().getValue();
-        ;
+        
+        this.setVisible(false);
+        this.dispose();
+        
+        
     }//GEN-LAST:event_kitaplarimaEkleButtonActionPerformed
 
     /**
