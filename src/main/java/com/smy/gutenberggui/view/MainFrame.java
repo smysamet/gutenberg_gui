@@ -1,8 +1,8 @@
 package com.smy.gutenberggui.view;
 
-import com.formdev.flatlaf.FlatDarkLaf;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.smy.gutenberggui.model.User;
+import com.smy.gutenberggui.util.DbHelper;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -13,6 +13,7 @@ public class MainFrame extends javax.swing.JFrame {
     private CardLayout cardLayout;
     private WebClient webClient;
     private User user;
+    private DbHelper dbHelper;
 
     /**
      * Creates new form MainFrame
@@ -20,6 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame(User user) {
         this.webClient = new WebClient();
         this.user = user;
+        this.dbHelper = new DbHelper();
         webClient.getOptions().setThrowExceptionOnScriptError(false);
 
         initComponents();
@@ -31,6 +33,10 @@ public class MainFrame extends javax.swing.JFrame {
         this.mainPanel.add(this.bookResultsJpanel, "bookResultsJpanel");
         this.cardLayout.show(this.mainPanel, "bookSearchJpanel");
 
+    }
+
+    public DbHelper getDbHelper() {
+        return dbHelper;
     }
 
     public User getUser() {
