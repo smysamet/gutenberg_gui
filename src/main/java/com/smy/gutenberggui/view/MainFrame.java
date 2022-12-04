@@ -18,10 +18,10 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public MainFrame(User user) {
+    public MainFrame(User user, DbHelper dbHelper) {
         this.webClient = new WebClient();
         this.user = user;
-        this.dbHelper = new DbHelper();
+        this.dbHelper = dbHelper;
         webClient.getOptions().setThrowExceptionOnScriptError(false);
 
         initComponents();

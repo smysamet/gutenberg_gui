@@ -1,6 +1,7 @@
 package com.smy.gutenberggui.view;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.smy.gutenberggui.model.User;
 import com.smy.gutenberggui.util.DbHelper;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -95,7 +96,11 @@ public class LoginJframe extends javax.swing.JFrame {
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                System.out.println("giriş başarılı");
+                MainFrame mainFrame = new MainFrame(new User(this.emailJTextField.getText()), dbHelper);
+                mainFrame.setLocationRelativeTo(null);
+                mainFrame.setVisible(true);
+                this.setVisible(false);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Email ve/veya şifre yanlış.",
