@@ -146,7 +146,7 @@ public class BookSearchJpanel extends javax.swing.JPanel {
             webClient.getOptions().setThrowExceptionOnScriptError(false);
 
             List<Object> tableContents = new ArrayList<>();
-
+            
             // ilk sayfayı al
             final HtmlPage page1 = webClient.getPage("https://www.gutenberg.org/ebooks/results/?"
                     + "author=" + innerYazar + "&"

@@ -25,8 +25,10 @@ public class BookResultsJpanel extends javax.swing.JPanel {
         this.tableData = tableData;
 
         DefaultTableModel model = (DefaultTableModel) this.kitapTable.getModel();
-
-        for (int i = 0; i < tableData.size() - 4; i += 4) {
+        
+        model.setRowCount(0);
+        
+        for (int i = 0; i < tableData.size() - 3; i += 4) {
             Object[] arr = {tableData.get(i), tableData.get(i + 1), tableData.get(i + 2), tableData.get(i + 3)};
             model.addRow(arr);
         }

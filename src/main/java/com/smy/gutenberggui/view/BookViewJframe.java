@@ -1,6 +1,8 @@
 package com.smy.gutenberggui.view;
 
 import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
 
 /**
@@ -21,9 +23,18 @@ public class BookViewJframe extends javax.swing.JFrame {
         initComponents();
         this.mainFrame = mainFrame;
         this.etext_no = etext_no;
-        final TextPage page;
-        page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/cache/epub/" + etext_no + "/pg" + etext_no + ".txt");
-        this.bookTextArea.append(page.getContent());
+        final HtmlPage page;
+        page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/ebooks/" + etext_no);
+        
+        
+        HtmlAnchor a = (HtmlAnchor) page.getByXPath("/html/body/div[1]/div[1]/div[2]/div[4]/div/div[1]/div/table/tbody/tr[9]/td[2]/a")
+                .get(0);
+        
+        
+        TextPage textPage = mainFrame.getWebClient().getPage("https://www.gutenberg.org" + a.getHrefAttribute());
+        
+        // kitabı okuma yerine ekle
+        this.bookTextArea.append(textPage.getContent());
         this.jScrollPane2.getVerticalScrollBar().getModel().setValue(0);
 
     }
