@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author sam
@@ -25,9 +24,9 @@ public class BookResultsJpanel extends javax.swing.JPanel {
         this.tableData = tableData;
 
         DefaultTableModel model = (DefaultTableModel) this.kitapTable.getModel();
-        
+
         model.setRowCount(0);
-        
+
         for (int i = 0; i < tableData.size() - 3; i += 4) {
             Object[] arr = {tableData.get(i), tableData.get(i + 1), tableData.get(i + 2), tableData.get(i + 3)};
             model.addRow(arr);
@@ -149,9 +148,9 @@ public class BookResultsJpanel extends javax.swing.JPanel {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         // get the etext no from selected row
-        String etext_no =  Integer.toString((int) this.kitapTable.getValueAt(this.kitapTable.getSelectedRow(), 0));
+        String etext_no = Integer.toString((int) this.kitapTable.getValueAt(this.kitapTable.getSelectedRow(), 0));
 
         try {
             temp = new BookViewJframe(etext_no, this.mainFrame);
@@ -160,7 +159,6 @@ public class BookResultsJpanel extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(BookResultsJpanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
 
     }//GEN-LAST:event_okuButtonActionPerformed

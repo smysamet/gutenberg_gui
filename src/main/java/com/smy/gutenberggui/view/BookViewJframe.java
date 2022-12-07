@@ -3,6 +3,7 @@ package com.smy.gutenberggui.view;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import java.io.IOException;
 
 /**
@@ -11,9 +12,8 @@ import java.io.IOException;
  */
 public class BookViewJframe extends javax.swing.JFrame {
 
-    
     private String etext_no;
-    
+
     private MainFrame mainFrame;
 
     /**
@@ -25,17 +25,25 @@ public class BookViewJframe extends javax.swing.JFrame {
         this.etext_no = etext_no;
         final HtmlPage page;
         page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/ebooks/" + etext_no);
-        
-        
-        HtmlAnchor a = (HtmlAnchor) page.getByXPath("/html/body/div[1]/div[1]/div[2]/div[4]/div/div[1]/div/table/tbody/tr[9]/td[2]/a")
-                .get(0);
-        
-        
+
+        HtmlTable htmlTable = (HtmlTable) page.getByXPath("/html/body/div[1]/div[1]/div[2]/div[4]/div/div[1]/div/table").get(0);
+
+        HtmlAnchor a = (HtmlAnchor) htmlTable.getRow(htmlTable.getRowCount() - 2).getCell(1).getElementsByTagName("a").get(0);
+
         TextPage textPage = mainFrame.getWebClient().getPage("https://www.gutenberg.org" + a.getHrefAttribute());
-        
+
         // kitabı okuma yerine ekle
-        this.bookTextArea.append(textPage.getContent());
-        this.jScrollPane2.getVerticalScrollBar().getModel().setValue(0);
+        this.bookTextArea.setText(textPage.getContent());
+
+        Thread t = new Thread() {
+            public void run() {
+                while(jScrollPane2.getVerticalScrollBar().getModel().getValue()<1000){
+                    
+                }
+                jScrollPane2.getVerticalScrollBar().getModel().setValue(0);
+            }
+        };
+        t.start();
 
     }
 
@@ -107,11 +115,11 @@ public class BookViewJframe extends javax.swing.JFrame {
     private void kitaplarimaEkleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kitaplarimaEkleButtonActionPerformed
         this.mainFrame.getUser().addBook(this.etext_no, this.jScrollPane2.getVerticalScrollBar().getModel().getValue());
         // get scrollbar's current position -> this.jScrollPane2.getVerticalScrollBar().getModel().getValue();
-        
+
         this.setVisible(false);
         this.dispose();
-        
-        
+
+
     }//GEN-LAST:event_kitaplarimaEkleButtonActionPerformed
 
     /**
