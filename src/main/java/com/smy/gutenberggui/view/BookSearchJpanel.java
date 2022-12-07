@@ -145,10 +145,12 @@ public class BookSearchJpanel extends javax.swing.JPanel {
 
             webClient.getOptions().setThrowExceptionOnScriptError(false);
 
+            List<Object> tableContents = new ArrayList<>();
+
             // ilk sayfayı al
             final HtmlPage page1 = webClient.getPage("https://www.gutenberg.org/ebooks/results/?"
-                    + "author="+innerYazar+"&"
-                    + "title="+innerKitap+"&"
+                    + "author=" + innerYazar + "&"
+                    + "title=" + innerKitap + "&"
                     + "subject=&"
                     + "lang=&"
                     + "category=&"
@@ -156,44 +158,62 @@ public class BookSearchJpanel extends javax.swing.JPanel {
                     + "filetype=&"
                     + "submit_search=Search");
 
-            // döngüyle gezebilmek için sayfa sayısını al
-            int sonucSayfaSayisi = ((HtmlParagraph) page1.getByXPath("/html/body/div[1]/div[2]/p[3]")
-                    .get(0)).getChildElementCount() - 1;
-
-            List<Object> tableContents = new ArrayList<>();
-
-            // sonuçlardaki bütün sayfaları gez
-            for (int i = 1; i <= sonucSayfaSayisi; i++) {
-
-                HtmlPage tempPage = webClient.getPage("https://www.gutenberg.org/ebooks/results/?"
-                        + "author=a&"
-                        + "title=animal&"
-                        + "subject=&"
-                        + "lang=&"
-                        + "category=&"
-                        + "locc=&"
-                        + "filetype=&"
-                        + "submit_search=Search"
-                        + "pageno=" + i);
-                //webClient.waitForBackgroundJavaScript(3000);
-                // tabloyu al
-                HtmlTable tempTable = (HtmlTable) tempPage.getByXPath("/html/body/div[1]/div[2]/table").get(0);
-
+            // eğer result tek sayfa ise
+            if (page1.getByXPath("/html/body/div[1]/div[2]/p[3]").isEmpty()) {
+                HtmlTable htmlTable = (HtmlTable) page1.getByXPath("/html/body/div[1]/div[2]/table").get(0);
                 // tablodaki tüm rowlardan veriyi çekiyoruz
-                for (int j = 1; j < tempTable.getRowCount(); j++) {
+                for (int j = 1; j < htmlTable.getRowCount(); j++) {
                     // add etext-no
-                    tableContents.add(Integer.parseInt(tempTable.getRow(j).getCell(0).getTextContent()));
+                    tableContents.add(Integer.parseInt(htmlTable.getRow(j).getCell(0).getTextContent()));
 
                     // add author
-                    tableContents.add(tempTable.getRow(j).getCell(2).getTextContent());
+                    tableContents.add(htmlTable.getRow(j).getCell(2).getTextContent());
 
                     // add title
-                    tableContents.add(tempTable.getRow(j).getCell(3).getTextContent());
+                    tableContents.add(htmlTable.getRow(j).getCell(3).getTextContent());
 
                     //add language
-                    tableContents.add(tempTable.getRow(j).getCell(4).getTextContent());
+                    tableContents.add(htmlTable.getRow(j).getCell(4).getTextContent());
+                }
+            // eğer result birden fazla sayfa ise
+            } else {
+                // döngüyle gezebilmek için sayfa sayısını al
+                int sonucSayfaSayisi = ((HtmlParagraph) page1.getByXPath("/html/body/div[1]/div[2]/p[3]")
+                        .get(0)).getChildElementCount() - 1;
+                // sonuçlardaki bütün sayfaları gez
+                for (int i = 1; i <= sonucSayfaSayisi; i++) {
+
+                    HtmlPage tempPage = webClient.getPage("https://www.gutenberg.org/ebooks/results/?"
+                            + "author=a&"
+                            + "title=animal&"
+                            + "subject=&"
+                            + "lang=&"
+                            + "category=&"
+                            + "locc=&"
+                            + "filetype=&"
+                            + "submit_search=Search"
+                            + "pageno=" + i);
+                    //webClient.waitForBackgroundJavaScript(3000);
+                    // tabloyu al
+                    HtmlTable tempTable = (HtmlTable) tempPage.getByXPath("/html/body/div[1]/div[2]/table").get(0);
+
+                    // tablodaki tüm rowlardan veriyi çekiyoruz
+                    for (int j = 1; j < tempTable.getRowCount(); j++) {
+                        // add etext-no
+                        tableContents.add(Integer.parseInt(tempTable.getRow(j).getCell(0).getTextContent()));
+
+                        // add author
+                        tableContents.add(tempTable.getRow(j).getCell(2).getTextContent());
+
+                        // add title
+                        tableContents.add(tempTable.getRow(j).getCell(3).getTextContent());
+
+                        //add language
+                        tableContents.add(tempTable.getRow(j).getCell(4).getTextContent());
+                    }
                 }
             }
+
             return tableContents;
         }
     }
