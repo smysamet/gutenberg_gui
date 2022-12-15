@@ -34,17 +34,6 @@ public class BookViewJframe extends javax.swing.JFrame {
 
         // kitabı okuma yerine ekle
         this.bookTextArea.setText(textPage.getContent());
-
-        Thread t = new Thread() {
-            public void run() {
-                while(jScrollPane2.getVerticalScrollBar().getModel().getValue()<1000){
-                    
-                }
-                jScrollPane2.getVerticalScrollBar().getModel().setValue(0);
-            }
-        };
-        t.start();
-
     }
 
     /**
@@ -111,6 +100,25 @@ public class BookViewJframe extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_geriButtonActionPerformed
+
+    public void setPosition(int position) {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    System.out.println("");
+                    if (jScrollPane2.getVerticalScrollBar().getModel().getValue() != position) {
+                        jScrollPane2.getVerticalScrollBar().getModel().setValue(position);
+                        System.out.println("Position adjusted.");
+                        break;
+                    }
+                }
+            }
+        };
+
+        t.start();
+    }
+
 
     private void kitaplarimaEkleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kitaplarimaEkleButtonActionPerformed
         this.mainFrame.getUser().addBook(this.etext_no, this.jScrollPane2.getVerticalScrollBar().getModel().getValue());
