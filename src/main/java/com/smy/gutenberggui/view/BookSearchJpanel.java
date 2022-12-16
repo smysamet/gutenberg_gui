@@ -105,7 +105,7 @@ public class BookSearchJpanel extends javax.swing.JPanel {
             try {
                 List<Object> resultList = submittingForm(null, kitapAraTextField.getText());
                 this.mainFrame.getBookResultsJpanel().setTableData(resultList);
-                // table olan jframe'i gösteriyor
+                // table olan jpanel'i gösteriyor
                 this.mainFrame.getCardLayout().show(this.mainFrame.getMainPanel(), "bookResultsJpanel");
             } catch (Exception ex) {
                 Logger.getLogger(BookSearchJpanel.class.getName()).log(Level.SEVERE, null, ex);

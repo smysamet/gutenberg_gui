@@ -4,16 +4,19 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.smy.gutenberggui.model.User;
 import com.smy.gutenberggui.util.DbHelper;
 import java.awt.CardLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MainFrame extends javax.swing.JFrame {
 
     private BookSearchJpanel bookSearchJpanel;
     private BookResultsJpanel bookResultsJpanel;
+    private MyBooksJpanel myBooksJpanel;
     private CardLayout cardLayout;
     private WebClient webClient;
     private User user;
     private DbHelper dbHelper;
+    private JPanel currentVisibleJpanel;
 
     /**
      * Creates new form MainFrame
@@ -28,10 +31,13 @@ public class MainFrame extends javax.swing.JFrame {
         this.cardLayout = new CardLayout();
         this.bookResultsJpanel = new BookResultsJpanel(this);
         this.bookSearchJpanel = new BookSearchJpanel(this);
+        this.myBooksJpanel = new MyBooksJpanel(this);
         this.mainPanel.setLayout(this.cardLayout);
         this.mainPanel.add(this.bookSearchJpanel, "bookSearchJpanel");
         this.mainPanel.add(this.bookResultsJpanel, "bookResultsJpanel");
+        this.mainPanel.add(this.myBooksJpanel, "myBooksJpanel");
         this.cardLayout.show(this.mainPanel, "bookSearchJpanel");
+        this.currentVisibleJpanel = this.mainPanel;
 
     }
 
@@ -62,7 +68,15 @@ public class MainFrame extends javax.swing.JFrame {
     public BookResultsJpanel getBookResultsJpanel() {
         return bookResultsJpanel;
     }
-
+    
+    public JButton getKitaplarimButton(){
+        return this.kitaplarimButton;
+    }
+    
+    public void setCurrentVisibleJpanel(JPanel jPanel){
+        this.currentVisibleJpanel = jPanel;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,6 +100,11 @@ public class MainFrame extends javax.swing.JFrame {
         solJpanel.setBackground(new java.awt.Color(45, 47, 48));
 
         kitaplarimButton.setText("Kitaplarım");
+        kitaplarimButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kitaplarimButtonActionPerformed(evt);
+            }
+        });
 
         cikisYapButton.setText("Çıkış Yap");
 
@@ -137,6 +156,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void kitaplarimButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kitaplarimButtonActionPerformed
+        if (this.currentVisibleJpanel != this.myBooksJpanel) {
+            this.myBooksJpanel.updateContent();
+            this.getCardLayout().show(this.getMainPanel(), "myBooksJpanel");
+            this.currentVisibleJpanel = this.myBooksJpanel;
+            this.kitaplarimButton.setEnabled(false);
+        }
+
+
+    }//GEN-LAST:event_kitaplarimButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

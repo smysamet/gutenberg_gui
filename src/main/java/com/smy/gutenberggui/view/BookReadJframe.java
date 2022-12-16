@@ -1,28 +1,70 @@
 package com.smy.gutenberggui.view;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.TextPage;
+import com.smy.gutenberggui.model.User;
+import com.smy.gutenberggui.util.DbHelper;
 import java.io.IOException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
  * @author sam
  */
 public class BookReadJframe extends javax.swing.JFrame {
+
+    private String etext_no;
+    private JLabel selectedJlabel;
+
     /**
      * Creates new form BookReadJframe
      */
-    public BookReadJframe(String etext_no, MainFrame mainFrame) throws IOException {
-        initComponents();
-        
-        // get scrollbar's current position
-        this.jScrollPane2.getVerticalScrollBar().getModel().getValue();
-        
-        final TextPage page;
-        page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/cache/epub/" + etext_no+ "/pg" + etext_no + ".txt");
-        this.bookTextArea.append(page.getContent());
-        System.out.println(bookTextArea.getText());
+    private MainFrame mainFrame;
 
+    public BookReadJframe(String etext_no, MainFrame mainFrame, JLabel selectedJlabel) {
+        try {
+            initComponents();
+
+            this.etext_no = etext_no;
+            this.selectedJlabel = selectedJlabel;
+
+            // get scrollbar's current position
+            this.jScrollPane2.getVerticalScrollBar().getModel().getValue();
+            this.mainFrame = mainFrame;
+            final TextPage page;
+            page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/cache/epub/" + etext_no + "/pg" + etext_no + ".txt");
+            this.bookTextArea.append(page.getContent());
+        } catch (IOException ex) {
+            Logger.getLogger(BookReadJframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FailingHttpStatusCodeException ex) {
+            Logger.getLogger(BookReadJframe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void setPosition(int position) {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                    while (true) {
+                        System.out.println("");
+                        if (jScrollPane2.getVerticalScrollBar().getModel().getValue() != position) {
+                            jScrollPane2.getVerticalScrollBar().getModel().setValue(position);
+                            System.out.println("Position adjusted.");
+                            break;
+                        }
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(BookReadJframe.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+
+        t.start();
     }
 
     /**
@@ -59,7 +101,7 @@ public class BookReadJframe extends javax.swing.JFrame {
         });
 
         bookTextArea.setEditable(false);
-        bookTextArea.setBackground(new java.awt.Color(255, 255, 255));
+        bookTextArea.setBackground(new java.awt.Color(187, 187, 187));
         bookTextArea.setColumns(20);
         bookTextArea.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         bookTextArea.setForeground(new java.awt.Color(0, 0, 0));
@@ -73,12 +115,12 @@ public class BookReadJframe extends javax.swing.JFrame {
         mainJPanelLayout.setHorizontalGroup(
             mainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainJPanelLayout.createSequentialGroup()
-                .addContainerGap(750, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(geriButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
             .addGroup(mainJPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
                 .addContainerGap())
         );
         mainJPanelLayout.setVerticalGroup(
@@ -97,13 +139,17 @@ public class BookReadJframe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void geriButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geriButtonActionPerformed
-        
+        this.mainFrame.getUser().addBook(this.etext_no, this.jScrollPane2.getVerticalScrollBar().getModel().getValue());
+        this.selectedJlabel.setText(this.etext_no + "&myMarker&" + this.jScrollPane2.getVerticalScrollBar().getModel().getValue());
+        this.mainFrame.setVisible(true);
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_geriButtonActionPerformed
+
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea bookTextArea;

@@ -5,6 +5,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -100,18 +103,26 @@ public class BookViewJframe extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_geriButtonActionPerformed
-
+    
+    public JToggleButton getKitaplarimaEkleButton(){
+        return this.kitaplarimaEkleButton;
+    }
+    
     public void setPosition(int position) {
         Thread t = new Thread() {
             @Override
             public void run() {
-                while (true) {
-                    System.out.println("");
-                    if (jScrollPane2.getVerticalScrollBar().getModel().getValue() != position) {
-                        jScrollPane2.getVerticalScrollBar().getModel().setValue(position);
-                        System.out.println("Position adjusted.");
-                        break;
+                try {
+                    Thread.sleep(100);
+                    while (true) {
+                        if (jScrollPane2.getVerticalScrollBar().getModel().getValue() != position) {
+                            jScrollPane2.getVerticalScrollBar().getModel().setValue(position);
+                            System.out.println("Position adjusted.");
+                            break;
+                        }
                     }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(BookViewJframe.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         };
