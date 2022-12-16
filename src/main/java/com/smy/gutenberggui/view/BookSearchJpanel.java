@@ -4,6 +4,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -113,19 +114,24 @@ public class BookSearchJpanel extends javax.swing.JPanel {
                 this.mainFrame.getBookResultsJpanel().setTableData(resultList);
                 // table olan jpanel'i gösteriyor
                 this.mainFrame.getCardLayout().show(this.mainFrame.getMainPanel(), "bookResultsJpanel");
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(BookSearchJpanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullPointerException ex) {
+                System.out.println("More than 1000 books matched your search. Please refine your query to see results.");
             }
         }
 
         if (kitapAramaComboBox.getSelectedItem().equals("Yazar")) {
+
             try {
                 List<Object> resultList = submittingForm(kitapAraTextField.getText(), null);
                 this.mainFrame.getBookResultsJpanel().setTableData(resultList);
                 // table olan jframe'i gösteriyor
                 this.mainFrame.getCardLayout().show(this.mainFrame.getMainPanel(), "bookResultsJpanel");
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(BookSearchJpanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullPointerException ex) {
+                System.out.println("More than 1000 books matched your search. Please refine your query to see results.");
             }
 
         }
@@ -135,8 +141,8 @@ public class BookSearchJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_kitapAramaComboBoxActionPerformed
 
-    private static List<Object> submittingForm(String yazarAdi, String kitapAdi) throws Exception {
-        try (final WebClient webClient = new WebClient()) {
+    private List<Object> submittingForm(String yazarAdi, String kitapAdi) throws IOException {
+        try {
 
             String innerYazar = "";
             String innerKitap = "";
@@ -149,12 +155,10 @@ public class BookSearchJpanel extends javax.swing.JPanel {
                 innerKitap = kitapAdi;
             }
 
-            webClient.getOptions().setThrowExceptionOnScriptError(false);
-
             List<Object> tableContents = new ArrayList<>();
-            
+
             // ilk sayfayı al
-            final HtmlPage page1 = webClient.getPage("https://www.gutenberg.org/ebooks/results/?"
+            final HtmlPage page1 = this.mainFrame.getWebClient().getPage("https://www.gutenberg.org/ebooks/results/?"
                     + "author=" + innerYazar + "&"
                     + "title=" + innerKitap + "&"
                     + "subject=&"
@@ -181,15 +185,26 @@ public class BookSearchJpanel extends javax.swing.JPanel {
                     //add language
                     tableContents.add(htmlTable.getRow(j).getCell(4).getTextContent());
                 }
-            // eğer result birden fazla sayfa ise
+                // eğer result birden fazla sayfa ise
             } else {
+
+                if (((HtmlParagraph) page1.getByXPath("/html/body/div[1]/div[2]/p[3]")
+                        .get(0)).getTextContent().equals("More than 1000 books matched your search. Please refine your query to see results.")) {
+                    JOptionPane.showMessageDialog(null,
+                            "Yaptığınız arama sonucunda 1000'den fazla kitap bulundu, lütfen daha spesifik bir arama yapınız!",
+                            "1000+ Kitap Bulundu",
+                            JOptionPane.WARNING_MESSAGE);
+
+                    return null;
+                }
+
                 // döngüyle gezebilmek için sayfa sayısını al
                 int sonucSayfaSayisi = ((HtmlParagraph) page1.getByXPath("/html/body/div[1]/div[2]/p[3]")
                         .get(0)).getChildElementCount() - 1;
                 // sonuçlardaki bütün sayfaları gez
                 for (int i = 1; i <= sonucSayfaSayisi; i++) {
 
-                    HtmlPage tempPage = webClient.getPage("https://www.gutenberg.org/ebooks/results/?"
+                    HtmlPage tempPage = this.mainFrame.getWebClient().getPage("https://www.gutenberg.org/ebooks/results/?"
                             + "author=a&"
                             + "title=animal&"
                             + "subject=&"
@@ -221,7 +236,10 @@ public class BookSearchJpanel extends javax.swing.JPanel {
             }
 
             return tableContents;
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
+        return null;
     }
 
 
