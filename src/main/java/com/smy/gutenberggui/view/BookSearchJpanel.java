@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -98,6 +99,11 @@ public class BookSearchJpanel extends javax.swing.JPanel {
     private void kitapAraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kitapAraButtonActionPerformed
 
         if (kitapAraTextField.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Kitap/Yazar adı boş olamaz!",
+                    "Hatalı Giriş",
+                    JOptionPane.WARNING_MESSAGE);
+
             return;
         }
 
