@@ -107,6 +107,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         cikisYapButton.setText("Çıkış Yap");
+        cikisYapButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cikisYapButtonActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel3.setText("<html>\nGUTENBERG <br>\nGUI");
@@ -167,6 +172,14 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_kitaplarimButtonActionPerformed
+
+    private void cikisYapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cikisYapButtonActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        LoginJframe loginJframe = new LoginJframe();
+        loginJframe.setLocationRelativeTo(null);
+        loginJframe.setVisible(true);
+    }//GEN-LAST:event_cikisYapButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
