@@ -2,8 +2,9 @@ package com.smy.gutenberggui.view;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.TextPage;
-import com.smy.gutenberggui.model.User;
-import com.smy.gutenberggui.util.DbHelper;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,9 +34,17 @@ public class BookReadJframe extends javax.swing.JFrame {
             // get scrollbar's current position
             this.jScrollPane2.getVerticalScrollBar().getModel().getValue();
             this.mainFrame = mainFrame;
-            final TextPage page;
-            page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/cache/epub/" + etext_no + "/pg" + etext_no + ".txt");
-            this.bookTextArea.append(page.getContent());
+            final HtmlPage page;
+            page = mainFrame.getWebClient().getPage("https://www.gutenberg.org/ebooks/" + etext_no);
+
+            HtmlTable htmlTable = (HtmlTable) page.getByXPath("/html/body/div[1]/div[1]/div[2]/div[4]/div/div[1]/div/table").get(0);
+
+            HtmlAnchor a = (HtmlAnchor) htmlTable.getRow(htmlTable.getRowCount() - 2).getCell(1).getElementsByTagName("a").get(0);
+
+            TextPage textPage = mainFrame.getWebClient().getPage("https://www.gutenberg.org" + a.getHrefAttribute());
+            
+            this.bookTextArea.setText(textPage.getContent());
+
         } catch (IOException ex) {
             Logger.getLogger(BookReadJframe.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FailingHttpStatusCodeException ex) {
@@ -145,7 +154,6 @@ public class BookReadJframe extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_geriButtonActionPerformed
-
 
     /**
      * @param args the command line arguments
