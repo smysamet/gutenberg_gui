@@ -153,9 +153,11 @@ public class BookResultsJpanel extends javax.swing.JPanel {
         String etext_no = Integer.toString((int) this.kitapTable.getValueAt(this.kitapTable.getSelectedRow(), 0));
 
         try {
+            
             temp = new BookViewJframe(etext_no, this.mainFrame);
             temp.setLocationRelativeTo(null);
             temp.setVisible(true);
+            this.mainFrame.setVisible(false);
             // set books scrollbar position
             temp.setPosition(0);
         } catch (IOException ex) {

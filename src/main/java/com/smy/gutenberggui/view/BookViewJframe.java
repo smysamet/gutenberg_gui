@@ -23,6 +23,7 @@ public class BookViewJframe extends javax.swing.JFrame {
      * Creates new form BookViewJframe
      */
     public BookViewJframe(String etext_no, MainFrame mainFrame) throws IOException {
+        this.setUndecorated(true);
         initComponents();
         this.mainFrame = mainFrame;
         this.etext_no = etext_no;
@@ -102,6 +103,7 @@ public class BookViewJframe extends javax.swing.JFrame {
     private void geriButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geriButtonActionPerformed
         this.setVisible(false);
         this.dispose();
+        this.mainFrame.setVisible(true);
     }//GEN-LAST:event_geriButtonActionPerformed
     
     public JToggleButton getKitaplarimaEkleButton(){
@@ -137,6 +139,7 @@ public class BookViewJframe extends javax.swing.JFrame {
 
         this.setVisible(false);
         this.dispose();
+        this.mainFrame.setVisible(true);
 
 
     }//GEN-LAST:event_kitaplarimaEkleButtonActionPerformed
