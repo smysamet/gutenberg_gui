@@ -43,6 +43,7 @@ public class LoginJframe extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         loginJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        registerJButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gutenberg Gui");
@@ -78,11 +79,20 @@ public class LoginJframe extends javax.swing.JFrame {
                 loginJButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(loginJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 140, 60));
+        jPanel1.add(loginJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 140, 60));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 48)); // NOI18N
         jLabel1.setText("Gutenberg GUI");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+
+        registerJButton.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        registerJButton.setText("Register");
+        registerJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerJButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(registerJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 140, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 460));
 
@@ -125,6 +135,15 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_loginJButtonActionPerformed
+
+    private void registerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerJButtonActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        
+        RegisterJframe registerJframe = new RegisterJframe(this.dbHelper);
+        registerJframe.setLocationRelativeTo(null);
+        registerJframe.setVisible(true);
+    }//GEN-LAST:event_registerJButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,5 +193,6 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton loginJButton;
     private javax.swing.JLabel passwordJLabel;
+    private javax.swing.JButton registerJButton;
     // End of variables declaration//GEN-END:variables
 }
