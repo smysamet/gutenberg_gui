@@ -102,7 +102,7 @@ public class BookReadJframe extends javax.swing.JFrame {
         mainJPanel.setMinimumSize(new java.awt.Dimension(930, 630));
         mainJPanel.setPreferredSize(new java.awt.Dimension(930, 630));
 
-        geriButton.setText("Geri");
+        geriButton.setText("Back");
         geriButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 geriButtonActionPerformed(evt);

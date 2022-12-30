@@ -79,7 +79,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="kitaplarimButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Kitaplar&#x131;m"/>
+            <Property name="text" type="java.lang.String" value="My Books"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kitaplarimButtonActionPerformed"/>
@@ -87,7 +87,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="cikisYapButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#xc7;&#x131;k&#x131;&#x15f; Yap"/>
+            <Property name="text" type="java.lang.String" value="Logout"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cikisYapButtonActionPerformed"/>

@@ -30,7 +30,7 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="543" max="32767" attributes="0"/>
+              <EmptySpace pref="534" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="okuButton" min="-2" max="-2" attributes="0"/>
                   <Component id="geriButton" min="-2" max="-2" attributes="0"/>
@@ -104,7 +104,7 @@
     </Container>
     <Component class="javax.swing.JToggleButton" name="geriButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Geri"/>
+        <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="geriButtonActionPerformed"/>
@@ -112,7 +112,7 @@
     </Component>
     <Component class="javax.swing.JToggleButton" name="okuButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Oku"/>
+        <Property name="text" type="java.lang.String" value="Read"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okuButtonActionPerformed"/>

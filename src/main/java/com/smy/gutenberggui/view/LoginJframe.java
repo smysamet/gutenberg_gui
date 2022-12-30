@@ -119,8 +119,8 @@ public class LoginJframe extends javax.swing.JFrame {
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Email ve/veya şifre yanlış.",
-                        "Hatalı Giriş",
+                        "Wrong email or password.",
+                        "Wrong input information.",
                         JOptionPane.WARNING_MESSAGE);
 
                 return;

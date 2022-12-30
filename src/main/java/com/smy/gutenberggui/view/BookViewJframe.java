@@ -67,7 +67,7 @@ public class BookViewJframe extends javax.swing.JFrame {
         mainJPanel.setPreferredSize(new java.awt.Dimension(930, 630));
         mainJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        geriButton.setText("Geri");
+        geriButton.setText("Back");
         geriButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 geriButtonActionPerformed(evt);
@@ -87,7 +87,7 @@ public class BookViewJframe extends javax.swing.JFrame {
 
         mainJPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 20, 901, 494));
 
-        kitaplarimaEkleButton.setText("Kitaplarıma Ekle");
+        kitaplarimaEkleButton.setText("Add to My Books");
         kitaplarimaEkleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kitaplarimaEkleButtonActionPerformed(evt);

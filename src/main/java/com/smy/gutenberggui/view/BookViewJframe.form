@@ -57,7 +57,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="geriButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Geri"/>
+            <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="geriButtonActionPerformed"/>
@@ -104,7 +104,7 @@
         </Container>
         <Component class="javax.swing.JToggleButton" name="kitaplarimaEkleButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Kitaplar&#x131;ma Ekle"/>
+            <Property name="text" type="java.lang.String" value="Add to My Books"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kitaplarimaEkleButtonActionPerformed"/>

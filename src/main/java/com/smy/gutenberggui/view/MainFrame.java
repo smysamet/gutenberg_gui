@@ -99,14 +99,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         solJpanel.setBackground(new java.awt.Color(45, 47, 48));
 
-        kitaplarimButton.setText("Kitaplarım");
+        kitaplarimButton.setText("My Books");
         kitaplarimButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kitaplarimButtonActionPerformed(evt);
             }
         });
 
-        cikisYapButton.setText("Çıkış Yap");
+        cikisYapButton.setText("Logout");
         cikisYapButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cikisYapButtonActionPerformed(evt);

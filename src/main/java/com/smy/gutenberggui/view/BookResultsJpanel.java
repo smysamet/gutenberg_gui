@@ -91,14 +91,14 @@ public class BookResultsJpanel extends javax.swing.JPanel {
             kitapTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        geriButton.setText("Geri");
+        geriButton.setText("Back");
         geriButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 geriButtonActionPerformed(evt);
             }
         });
 
-        okuButton.setText("Oku");
+        okuButton.setText("Read");
         okuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okuButtonActionPerformed(evt);
@@ -114,7 +114,7 @@ public class BookResultsJpanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(543, Short.MAX_VALUE)
+                .addContainerGap(534, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(okuButton)
                     .addComponent(geriButton))
@@ -143,8 +143,8 @@ public class BookResultsJpanel extends javax.swing.JPanel {
         // check if a row selected
         if (this.kitapTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null,
-                    "Lütfen bir kitap seçin.",
-                    "Kitap Seçilmedi",
+                    "Please select a book.",
+                    "No book choosen.",
                     JOptionPane.WARNING_MESSAGE);
             return;
         }

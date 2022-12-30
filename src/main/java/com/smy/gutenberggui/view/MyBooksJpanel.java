@@ -117,7 +117,7 @@ public class MyBooksJpanel extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(650, 630));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnGeri.setText("Geri");
+        btnGeri.setText("Back");
         btnGeri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGeriActionPerformed(evt);
@@ -125,7 +125,7 @@ public class MyBooksJpanel extends javax.swing.JPanel {
         });
         add(btnGeri, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 570, -1, -1));
 
-        btnOku.setText("Oku");
+        btnOku.setText("Read");
         btnOku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkuActionPerformed(evt);
@@ -133,7 +133,7 @@ public class MyBooksJpanel extends javax.swing.JPanel {
         });
         add(btnOku, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, -1, -1));
 
-        btnSil.setText("Sil");
+        btnSil.setText("Delete");
         btnSil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSilActionPerformed(evt);
@@ -169,8 +169,8 @@ public class MyBooksJpanel extends javax.swing.JPanel {
 
         if (this.jTable1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null,
-                    "Lütfen bir kitap seçiniz!",
-                    "Kitap Seçilmedi",
+                    "Please select a book!",
+                    "No book choosen.",
                     JOptionPane.WARNING_MESSAGE);
 
             return;

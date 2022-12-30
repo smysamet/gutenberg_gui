@@ -28,7 +28,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnGeri">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Geri"/>
+        <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGeriActionPerformed"/>
@@ -41,7 +41,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnOku">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Oku"/>
+        <Property name="text" type="java.lang.String" value="Read"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOkuActionPerformed"/>
@@ -54,7 +54,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSil">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sil"/>
+        <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSilActionPerformed"/>

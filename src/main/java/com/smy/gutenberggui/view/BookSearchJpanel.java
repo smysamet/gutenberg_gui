@@ -47,16 +47,16 @@ public class BookSearchJpanel extends javax.swing.JPanel {
         kitapAraTextField.setBackground(new java.awt.Color(212, 212, 212));
         kitapAraTextField.setForeground(new java.awt.Color(60, 63, 65));
 
-        jLabel2.setText("Kitap Ara:");
+        jLabel2.setText("Search Book:");
 
-        kitapAramaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kitap Adı", "Yazar" }));
+        kitapAramaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Author" }));
         kitapAramaComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kitapAramaComboBoxActionPerformed(evt);
             }
         });
 
-        kitapAraButton.setText("Ara");
+        kitapAraButton.setText("Search");
         kitapAraButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kitapAraButtonActionPerformed(evt);
@@ -100,14 +100,14 @@ public class BookSearchJpanel extends javax.swing.JPanel {
 
         if (kitapAraTextField.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null,
-                    "Kitap/Yazar adı boş olamaz!",
-                    "Hatalı Giriş",
+                    "Title/Author can not be empty!",
+                    "Wrong input!",
                     JOptionPane.WARNING_MESSAGE);
 
             return;
         }
 
-        if (kitapAramaComboBox.getSelectedItem().equals("Kitap Adı")) {
+        if (kitapAramaComboBox.getSelectedItem().equals("Title")) {
             try {
                 List<Object> resultList = submittingForm(null, kitapAraTextField.getText());
                 this.mainFrame.getBookResultsJpanel().setTableData(resultList);
@@ -120,7 +120,7 @@ public class BookSearchJpanel extends javax.swing.JPanel {
             }
         }
 
-        if (kitapAramaComboBox.getSelectedItem().equals("Yazar")) {
+        if (kitapAramaComboBox.getSelectedItem().equals("Author")) {
 
             try {
                 List<Object> resultList = submittingForm(kitapAraTextField.getText(), null);
@@ -191,8 +191,8 @@ public class BookSearchJpanel extends javax.swing.JPanel {
                 if (((HtmlParagraph) page1.getByXPath("/html/body/div[1]/div[2]/p[3]")
                         .get(0)).getTextContent().equals("More than 1000 books matched your search. Please refine your query to see results.")) {
                     JOptionPane.showMessageDialog(null,
-                            "Yaptığınız arama sonucunda 1000'den fazla kitap bulundu, lütfen daha spesifik bir arama yapınız!",
-                            "1000+ Kitap Bulundu",
+                            "More than 1000 books matched your search. Please refine your query to see results.",
+                            "1000+ books found.",
                             JOptionPane.WARNING_MESSAGE);
 
                     return null;
