@@ -1,8 +1,9 @@
+/home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/util/DbHelper.java
 /home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/view/BookSearchJpanel.java
 /home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/view/BookReadJframe.java
+/home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/view/LoginJframe.java
+/home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/view/BookViewJframe.java
 /home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/model/User.java
-/home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/model/Book.java
 /home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/view/BookResultsJpanel.java
-/home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/VeriCek.java
+/home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/view/MyBooksJpanel.java
 /home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/view/MainFrame.java
-/home/sam/NetBeansProjects/GutenBergGUI/src/main/java/com/smy/gutenberggui/GutenBergGUI.java

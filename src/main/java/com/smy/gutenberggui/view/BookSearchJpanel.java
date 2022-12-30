@@ -1,6 +1,5 @@
 package com.smy.gutenberggui.view;
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
@@ -141,7 +140,8 @@ public class BookSearchJpanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_kitapAramaComboBoxActionPerformed
 
-    private List<Object> submittingForm(String yazarAdi, String kitapAdi) throws IOException {
+    public List<Object> submittingForm(String yazarAdi, String kitapAdi) throws IOException {
+        List<Object> tableContents = null;
         try {
 
             String innerYazar = "";
@@ -155,7 +155,7 @@ public class BookSearchJpanel extends javax.swing.JPanel {
                 innerKitap = kitapAdi;
             }
 
-            List<Object> tableContents = new ArrayList<>();
+            tableContents = new ArrayList<>();
 
             // ilk sayfayı al
             final HtmlPage page1 = this.mainFrame.getWebClient().getPage("https://www.gutenberg.org/ebooks/results/?"
@@ -239,7 +239,7 @@ public class BookSearchJpanel extends javax.swing.JPanel {
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
-        return null;
+        return tableContents;
     }
 
 
